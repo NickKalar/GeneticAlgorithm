@@ -48,8 +48,25 @@ def control(countdown, pop):
 
 # randomly selects an individual from the population to be used later
 def selection(popSelect):
-    rand = randrange(0, len(popSelect))
-    return popSelect[int(rand)]
+    fitness = 0
+    best = 0
+    bestFit = []
+    for p in popSelect:
+        for i in p:
+            if i == 1:
+                fitness += 1
+
+    for p in popSelect:
+        localFitness = 0
+        for i in p:
+            if i == 1:
+                localFitness += 1
+        if localFitness > best:
+            bestFit = p
+        if random() < localFitness/fitness:
+            return p
+
+    return bestFit
 
 
 # creates two new individuals from "crossing" the genome of the "father" and "mother"
@@ -85,12 +102,12 @@ def elitism(population, newPopulation):
     global best
     quality = 0
     for individual in population:
-        t = 0
+        tally = 0
         for i in individual:
             if i == 1:
-                t += 1
-        if t > quality:
-            quality = t
+                tally += 1
+        if tally > quality:
+            quality = tally
             best = individual
     newPopulation.append(best)
     return newPopulation

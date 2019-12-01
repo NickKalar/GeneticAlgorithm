@@ -6,7 +6,7 @@ seed(None, 2)
 # total number of "genes" per individuals
 genome = 20
 # total number of generations to be ran
-generations = 10
+generations = 100
 
 
 def control(countdown, pop):
@@ -29,6 +29,7 @@ def control(countdown, pop):
         print(f"Epoch {countdown+1}: ")
 
         individual = 1
+        tempfittest = 1
         for p in pop:
             fitness = 0
             for i in p:
@@ -40,10 +41,12 @@ def control(countdown, pop):
             # stores the value for the "fittest" individual in this generation
             if fitness > populationFitness:
                 populationFitness = fitness
-
+                fittest = tempfittest
+            tempfittest += 1
         countdown += 1
+
     if populationFitness == 20:
-        print("We have a winner!")
+        print(f"We have a winner! #{fittest} is the best!")
 
 
 # randomly selects an individual from the population to be used later
@@ -75,7 +78,7 @@ def crossover(father, mother):
     first = []
     second = []
     for j in range(genome):
-        if genome < genome/2:
+        if j < genome/2:
             first.append(mother[j])
             second.append(father[j])
         else:

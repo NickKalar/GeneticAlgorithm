@@ -88,7 +88,7 @@ def crossover(father, mother):
 def mutate(ind):
     rand = randrange(0, 9)
     if rand == 3:
-        i = randrange(0, 19)
+        i = randrange(0, 20)
         if ind[i] == 0:
             ind[i] = 1
         else:

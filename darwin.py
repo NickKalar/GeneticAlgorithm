@@ -5,11 +5,10 @@ from random import randrange
 seed(None, 2)
 # total number of "genes" per individuals
 genome = 20
-# total number of generations to be ran
-generations = 100
 
 
-def control(countdown, pop):
+def control(countdown, pop, generations):
+    global fittest
     populationFitness = 0
     # executes for a certain number of generations
     # or until an individual has a fitness of 20
@@ -46,7 +45,9 @@ def control(countdown, pop):
         countdown += 1
 
     if populationFitness == 20:
-        print(f"We have a winner! #{fittest} is the best!")
+        print(f"We have a winner! #{fittest} is the best after {countdown} generations!")
+    else:
+        print("Everyone sucked.")
 
 
 # randomly selects an individual from the population to be used later
@@ -117,8 +118,9 @@ def elitism(population, newPopulation):
 
 
 def main():
-    countdown = 0
     pop = [[], [], [], [], [], [], [], [], [], []]
+
+    generations = int(input("How many generations do you wish to run: "))
 
     for x in range(len(pop)):
         for y in range(genome):
@@ -127,7 +129,7 @@ def main():
                 i = 1
             pop[x].append(i)
 
-    control(countdown, pop)
+    control(0, pop, generations)
 
 
 main()

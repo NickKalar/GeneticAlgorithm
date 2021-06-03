@@ -12,7 +12,7 @@ def control(countdown, pop, generations):
     populationFitness = 0
     # executes for a certain number of generations
     # or until an individual has a fitness of 20
-    while countdown < generations and populationFitness != 20:
+    while countdown < generations and populationFitness != genome:
         newPop = []
         for p in pop:
             if random() > .5:
@@ -90,7 +90,7 @@ def crossover(father, mother):
 
 # given a 10% chance to mutate a "gene"
 def mutate(ind):
-    rand = randrange(0, 9)
+    rand = randrange(0, 10)
     if rand == 3:
         i = randrange(0, 20)
         if ind[i] == 0:
